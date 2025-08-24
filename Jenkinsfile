@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t node-app .'
+                powershell 'docker build -t node-app .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 3000:3000 node-app'
+                powershell 'docker run -d -p 3000:3000 node-app'
             }
         }
     }

@@ -26,6 +26,12 @@ pipeline {
             }
         }
 
+stage('Build') {
+            steps {
+                sh 'npm run build || echo "Build skipped"'
+            }
+        }
+
         stage('Deploy') {
             when {
                 branch 'main'

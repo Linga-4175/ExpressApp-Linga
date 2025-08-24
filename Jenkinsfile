@@ -26,9 +26,9 @@ pipeline {
             }
         }
 
-stage('Build') {
+stage('Build Image') {
             steps {
-                sh 'npm run build || echo "Build skipped"'
+                sh 'docker build -t my-node:1.0 ."'
             }
         }
 

@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 sshagent(['github-ssh-key']) {
-                    git url: 'git@github.com:Linga-4175/ExpressApp-Linga.git', branch: 'main'
+                    git url: 'git@github.com:Linga-4175/ExpressApp-Linga.git', credentialsId: 'github-ssh-key', branch: 'main'
                 }
             }
         }

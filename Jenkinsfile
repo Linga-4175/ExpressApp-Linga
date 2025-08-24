@@ -2,53 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build Docker Image') {
             steps {
-                checkout scm
+                sh 'docker build -t node-app .'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Run Container') {
             steps {
-                sh 'npm install'
+                sh 'docker run -d -p 3000:3000 node-app'
             }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'npm test || echo "Tests skipped"'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm run build || echo "Build skipped"'
-            }
-        }
-
-stage('Build Image') {
-            steps {
-                sh 'docker build -t my-node:1.0 ."'
-            }
-        }
-
-        stage('Deploy') {
-            when {
-                branch 'main'
-            }
-            steps {
-                echo 'Deploying to production...'
-                // Add deployment logic here
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Pipeline completed successfully!'
-        }
-        failure {
-            echo '❌ Pipeline failed. Check logs for details.'
         }
     }
 }

@@ -19,8 +19,8 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh 'docker stop node-express || true && docker rm node-express || true'
-                    sh 'docker run -d --name node-express -p 3000:3000 node-express-app'
+                    bat 'docker stop node-express || true && docker rm node-express || true'
+                    bat 'docker run -d --name node-express -p 3000:3000 node-express-app'
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('Post-Deploy Test') {
             steps {
                 script {
-                    sh 'curl --fail http://localhost:3000 || exit 1'
+                    bat 'curl --fail http://localhost:3000 || exit 1'
                 }
             }
         }
